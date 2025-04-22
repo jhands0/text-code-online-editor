@@ -29,6 +29,30 @@
    * Search functionality within the document.
    * Find and Replace text.
 
+# Non Functional Requirements
 
+1. Performance
+    * The system should handle a large number of concurrent users without significant lag.
+    * Real-time updates should be fast and efficient.
+
+2. Reliability
+    * High availability with minimal downtime.
+    * Automatic backups and disaster recovery plans.
+
+3. Usability
+    * Intuitive and user-friendly interface.
+    * Accessibility features for users with disabilities.
+
+4. Maintainability
+    * Code should be well-documented and modular.
+    * Regular updates and bug fixes.
+
+5. Compatibility
+    * Cross-browser compatibility (Chrome, Firefox, Safari, etc.).
+    * Responsive design for mobile and tablet devices.
+
+6. Support and Documentation
+    * Comprehensive user documentation and tutorials.
+    * Customer support for troubleshooting and assistance.
 
 
