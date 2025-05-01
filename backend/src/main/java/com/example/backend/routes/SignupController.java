@@ -1,4 +1,4 @@
-package com.example.backend;
+package com.example.backend.routes;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
