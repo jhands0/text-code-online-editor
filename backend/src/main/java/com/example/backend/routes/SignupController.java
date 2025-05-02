@@ -9,17 +9,29 @@ import java.util.List;
 import java.util.Arrays;
 
 @RestController
+@RequestMapping("api/signup")
 public class SignupController {
-
     private final SignupService signupService;
 
     public SignupController(SignupService signupService) {
         this.signupService = signupService;
     }
 
-    @GetMapping("/api/signup")
-    public List<User> getUser() {
-        return Arrays.asList(new User("name1", "email1", "pfp"), new User("name2", "email2", "pfp"));
+    @GetMapping("/{email}")
+    @Operation(summary = "Get a user by unique email address")
+    public ResponseEntity<User> getUser(@PathVariable String email) {
+        try {
+            User user = signupService.getUserByEmail(email);
+            if (email != null) {
+                return new ResponseEntity<>(user, HttpStatus.OK);
+            } else {
+                log.error("Document Not Found: " + email);
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+        } catch (Exception e) {
+            log.error("Internal Server Error: " + e.getMessage());
+            return new ResponseEntity<>(HttpStatus.Internal_SERVER_ERROR);
+        }
     }
 
     @PostMapping("/api/signup")
