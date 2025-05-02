@@ -11,6 +11,12 @@ import java.util.Arrays;
 @RestController
 public class SignupController {
 
+    private final SignupService signupService;
+
+    public SignupController(SignupService signupService) {
+        this.signupService = signupService;
+    }
+
     @GetMapping("/api/signup")
     public List<User> getUser() {
         return Arrays.asList(new User("name1", "email1", "pfp"), new User("name2", "email2", "pfp"));
