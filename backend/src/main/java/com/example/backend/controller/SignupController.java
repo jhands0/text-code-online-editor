@@ -1,4 +1,5 @@
-package com.example.backend.routes;
+package com.example.backend.controller;
+import com.example.backend.service.SignupService;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Arrays;

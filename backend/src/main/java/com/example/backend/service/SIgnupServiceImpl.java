@@ -1,4 +1,4 @@
-package com.example.backend.routes;
+package com.example.backend.service;
 
 import org.springframework.stereotype.Service;
 
