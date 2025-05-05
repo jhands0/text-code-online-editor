@@ -6,7 +6,7 @@ public interface SignupService {
     User getUserByEmail(String email);
 }
 @Service
-public class SignupServiceImpl {
+public class SignupServiceImpl implements SignupService {
     private final UserRepository userRepository;
 
     public SignupServiceImpl(UserRepository userRepository) {
