@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Arrays;
 
 import com.example.backend.service.SignupService;
+import com.example.backend.entity.User;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
