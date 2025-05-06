@@ -22,4 +22,10 @@ public class UserRepositoryImpl implements UserRepository {
     public User findById(String id) {
         return userCol.get(id).contentAs(User.class);
     }
+
+    @Override
+    public User save(User user) {
+        userCol.insert(user.getEmail(), user);
+        return user;
+    }
 }

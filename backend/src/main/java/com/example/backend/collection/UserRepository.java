@@ -4,4 +4,6 @@ import com.example.backend.models.User;
 
 public interface UserRepository {
     User findById(String id);
+
+    User save(User user);
 }
