@@ -1,10 +1,10 @@
 package com.example.backend.service;
 
+import com.example.backend.entity.User;
+import com.example.backend.collection.UserRepository;
+
 import org.springframework.stereotype.Service;
 
-public interface SignupService {
-    User getUserByEmail(String email);
-}
 @Service
 public class SignupServiceImpl implements SignupService {
     private final UserRepository userRepository;
@@ -17,4 +17,7 @@ public class SignupServiceImpl implements SignupService {
     public User getUserByEmail(String email) {
         return userRepository.findById(email);
     }
+
+    @Override
+    public User createUser(User user) { return userRepository.save(user); }
 }
