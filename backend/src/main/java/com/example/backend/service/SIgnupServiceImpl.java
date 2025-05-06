@@ -20,4 +20,7 @@ public class SignupServiceImpl implements SignupService {
 
     @Override
     public User createUser(User user) { return userRepository.save(user); }
+
+    @Override
+    public User updateUser(String email, User user) { return userRepository.update(email, user); }
 }

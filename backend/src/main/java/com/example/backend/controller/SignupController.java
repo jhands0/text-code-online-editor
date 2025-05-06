@@ -62,7 +62,7 @@ public class SignupController {
 
     @PutMapping("/{email}")
     @Operation(summary = "Update a user's data")
-    public ResponseEntity<user> updateUser(@PathVariable String email, @Valid @RequestBody User user) {
+    public ResponseEntity<User> updateUser(@PathVariable String email, @Valid @RequestBody User user) {
         try {
             User updatedUser = signupService.updateUser(email, user);
             if (updatedUser != null) {
