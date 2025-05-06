@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Arrays;
 
 @RestController
-@RequestMapping("api/signup")
+@RequestMapping("api/v1/signup")
 public class SignupController {
     private final SignupService signupService;
 
@@ -26,13 +26,20 @@ public class SignupController {
             }
         } catch (Exception e) {
             log.error("Internal Server Error: " + e.getMessage());
-            return new ResponseEntity<>(HttpStatus.Internal_SERVER_ERROR);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
-    @PostMapping("/api/signup")
-    public List<user> postUser() {
-        return Arrays.asList(new User("name1", "email1", "pfp"), new User("name2", "email2", "pfp"));
+    @PostMapping("/{email}")
+    @Operation(summary = "Create a user with unique email address")
+    public ResponseEntity<User> createUser(@PathVariable String email, @Valid @RequestBody User user) {
+        try {
+            User newUser = signupService.createUser(user);
+            return new ResponseEntity<>(newUser, HttpStatus.CREATED);
+        } catch (Exception e) {
+            log.error("Internal Server Error: " + e.getMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @PutMapping("/api/signup")
