@@ -6,4 +6,6 @@ public interface UserRepository {
     User findById(String id);
 
     User save(User user);
+
+    User update(String id, User user);
 }

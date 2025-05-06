@@ -28,4 +28,10 @@ public class UserRepositoryImpl implements UserRepository {
         userCol.insert(user.getEmail(), user);
         return user;
     }
+
+    @Override
+    public User update(String id, User user) {
+        userCol.replace(id, user);
+        return user;
+    }
 }
