@@ -1,6 +1,6 @@
 package com.example.backend.collection;
 
-import com.example.backend.models.User;
+import com.example.backend.entity.User;
 
 public interface UserRepository {
     User findById(String id);

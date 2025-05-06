@@ -1,10 +1,9 @@
 package com.example.backend.collection;
 
-import com.example.backend.models.User;
+import com.example.backend.entity.User;
 import com.couchbase.client.java.Bucket;
 import com.couchbase.client.java.Cluster;
 import com.couchbase.client.java.Collection;
-import org.springframework.boot.autoconfigure.cache.CacheProperties;
 import org.springframework.stereotype.Repository;
 
 
