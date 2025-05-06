@@ -7,11 +7,9 @@ import com.couchbase.client.java.Collection;
 import org.springframework.boot.autoconfigure.cache.CacheProperties;
 import org.springframework.stereotype.Repository;
 
-public interface UserRespository {
-    User findById(String id);
-}
+
 @Repository
-public class UserRepositoryImpl implements UserRespository {
+public class UserRepositoryImpl implements UserRepository {
     private final Cluster cluster;
     private final Collection userCol;
 
