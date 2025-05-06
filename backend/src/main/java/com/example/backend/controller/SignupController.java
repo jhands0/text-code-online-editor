@@ -60,9 +60,20 @@ public class SignupController {
         }
     }
 
-    @PutMapping("/api/signup")
-    public List<user> putUser() {
-        return Arrays.asList(new User("name1", "email1", "pfp"), new User("name2", "email2", "pfp"));
+    @PutMapping("/{email}")
+    @Operation(summary = "Update a user's data")
+    public ResponseEntity<user> updateUser(@PathVariable String email, @Valid @RequestBody User user) {
+        try {
+            User updatedUser = signupService.updateUser(user);
+            if (updatedUser != null) {
+                return new ResponseEntity<>(updatedUser, HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+        } catch (Exception e) {
+            log.error("Internal Server Error: " + e.getMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @DeleteMapping("/api/signup")
