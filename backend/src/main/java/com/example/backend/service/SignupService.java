@@ -7,4 +7,6 @@ public interface SignupService {
     User createUser(User user);
 
     User updateUser(String email, User user);
+
+    void deleteUser(String email);
 }

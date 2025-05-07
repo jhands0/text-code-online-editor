@@ -23,4 +23,7 @@ public class SignupServiceImpl implements SignupService {
 
     @Override
     public User updateUser(String email, User user) { return userRepository.update(email, user); }
+
+    @Override
+    public void deleteUser(String email) { userRepository.delete(email); }
 }
