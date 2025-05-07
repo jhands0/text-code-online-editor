@@ -2,6 +2,8 @@ package com.example.backend.entity;
 
 
 public class User {
+
+    private String id;
     private String name;
     private String email;
     private String profilePicture;
@@ -11,6 +13,8 @@ public class User {
         this.email = email;
         this.profilePicture = profilePicture;
     }
+
+    public String getId() { return id; }
 
     public String getName() {
         return name;

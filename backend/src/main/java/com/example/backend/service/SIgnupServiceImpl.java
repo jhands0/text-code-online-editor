@@ -14,16 +14,16 @@ public class SignupServiceImpl implements SignupService {
     }
 
     @Override
-    public User getUserByEmail(String email) {
-        return userRepository.findById(email);
+    public User getUserById(String id) {
+        return userRepository.findById(id);
     }
 
     @Override
     public User createUser(User user) { return userRepository.save(user); }
 
     @Override
-    public User updateUser(String email, User user) { return userRepository.update(email, user); }
+    public User updateUser(String id, User user) { return userRepository.update(id, user); }
 
     @Override
-    public void deleteUser(String email) { userRepository.delete(email); }
+    public void deleteUser(String id) { userRepository.delete(id); }
 }

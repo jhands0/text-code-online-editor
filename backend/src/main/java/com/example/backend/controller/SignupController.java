@@ -31,15 +31,15 @@ public class SignupController {
         this.signupService = signupService;
     }
 
-    @GetMapping("/{email}")
-    @Operation(summary = "Get a user by unique email address")
-    public ResponseEntity<User> getUser(@PathVariable String email) {
+    @GetMapping("/{id}")
+    @Operation(summary = "Get a user by unique id")
+    public ResponseEntity<User> getUser(@PathVariable String id) {
         try {
-            User user = signupService.getUserByEmail(email);
-            if (email != null) {
+            User user = signupService.getUserById(id);
+            if (id != null) {
                 return new ResponseEntity<>(user, HttpStatus.OK);
             } else {
-                log.error("Document Not Found: " + email);
+                log.error("Document Not Found: " + id);
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             }
         } catch (Exception e) {
@@ -48,9 +48,9 @@ public class SignupController {
         }
     }
 
-    @PostMapping("/{email}")
-    @Operation(summary = "Create a user with unique email address")
-    public ResponseEntity<User> createUser(@PathVariable String email, @Valid @RequestBody User user) {
+    @PostMapping("/{id}")
+    @Operation(summary = "Create a user with unique id")
+    public ResponseEntity<User> createUser(@PathVariable String id, @Valid @RequestBody User user) {
         try {
             User newUser = signupService.createUser(user);
             return new ResponseEntity<>(newUser, HttpStatus.CREATED);
@@ -60,11 +60,11 @@ public class SignupController {
         }
     }
 
-    @PutMapping("/{email}")
+    @PutMapping("/{id}")
     @Operation(summary = "Update a user's data")
-    public ResponseEntity<User> updateUser(@PathVariable String email, @Valid @RequestBody User user) {
+    public ResponseEntity<User> updateUser(@PathVariable String id, @Valid @RequestBody User user) {
         try {
-            User updatedUser = signupService.updateUser(email, user);
+            User updatedUser = signupService.updateUser(id, user);
             if (updatedUser != null) {
                 return new ResponseEntity<>(updatedUser, HttpStatus.OK);
             } else {
@@ -76,11 +76,11 @@ public class SignupController {
         }
     }
 
-    @DeleteMapping("/{email}")
+    @DeleteMapping("/{id}")
     @Operation(summary = "Delete a user")
-    public ResponseEntity<Void> deleteUser(@PathVariable String email) {
+    public ResponseEntity<Void> deleteUser(@PathVariable String id) {
         try {
-            signupService.deleteUser(email);
+            signupService.deleteUser(id);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } catch (Exception e) {
             log.error("Internal Server Error: " + e.getMessage());
