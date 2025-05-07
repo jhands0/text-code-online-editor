@@ -76,9 +76,16 @@ public class SignupController {
         }
     }
 
-    @DeleteMapping("/api/signup")
-    public List<user> deleteUser() {
-        return Arrays.asList(new User("name1", "email1", "pfp"), new User("name2", "email2", "pfp"));
+    @DeleteMapping("/{email}")
+    @Operation(summary = "Delete a user")
+    public ResponseEntity<Void> deleteUser(@PathVariable String email) {
+        try {
+            signupService.deleteUser(email);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } catch (Exception e) {
+            log.error("Internal Server Error: " + e.getMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
 }
