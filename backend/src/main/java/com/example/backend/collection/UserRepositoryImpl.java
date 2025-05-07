@@ -33,4 +33,9 @@ public class UserRepositoryImpl implements UserRepository {
         userCol.replace(id, user);
         return user;
     }
+
+    @Override
+    public void delete(String id) {
+        userCol.remove(id);
+    }
 }

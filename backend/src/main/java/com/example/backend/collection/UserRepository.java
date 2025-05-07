@@ -8,4 +8,6 @@ public interface UserRepository {
     User save(User user);
 
     User update(String id, User user);
+
+    void delete(String id);
 }
