@@ -31,6 +31,9 @@ public class SignupController {
         this.signupService = signupService;
     }
 
+    private final static String INTERNAL_SERVER_ERROR = "Internal Server Error";
+    private final static String DOCUMENT_NOT_FOUND = "Document Not Found";
+
     @GetMapping("/{id}")
     @Operation(summary = "Get a user by unique id")
     public ResponseEntity<User> getUser(@PathVariable String id) {
@@ -39,11 +42,11 @@ public class SignupController {
             if (id != null) {
                 return new ResponseEntity<>(user, HttpStatus.OK);
             } else {
-                log.error("Document Not Found: " + id);
+                log.error(DOCUMENT_NOT_FOUND + ": " + id);
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             }
         } catch (Exception e) {
-            log.error("Internal Server Error: " + e.getMessage());
+            log.error(INTERNAL_SERVER_ERROR + ": " + e.getMessage());
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
@@ -55,7 +58,7 @@ public class SignupController {
             User newUser = signupService.createUser(user);
             return new ResponseEntity<>(newUser, HttpStatus.CREATED);
         } catch (Exception e) {
-            log.error("Internal Server Error: " + e.getMessage());
+            log.error(INTERNAL_SERVER_ERROR + ": " + e.getMessage());
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
@@ -71,7 +74,7 @@ public class SignupController {
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             }
         } catch (Exception e) {
-            log.error("Internal Server Error: " + e.getMessage());
+            log.error(INTERNAL_SERVER_ERROR + ": " + e.getMessage());
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
@@ -83,7 +86,7 @@ public class SignupController {
             signupService.deleteUser(id);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } catch (Exception e) {
-            log.error("Internal Server Error: " + e.getMessage());
+            log.error(INTERNAL_SERVER_ERROR + ": " + e.getMessage());
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
