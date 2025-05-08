@@ -29,5 +29,5 @@ public class Document implements Serializable {
     private List<String> content;
 
     @NotBlank(message = "Timestamp is mandatory")
-    private LocalDateTime createAt;
+    private LocalDateTime createdAt;
 }
