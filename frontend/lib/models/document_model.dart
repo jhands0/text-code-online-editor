@@ -1,12 +1,12 @@
 import 'dart:convert'
 
-class DocumentModel {
+class Document {
   final String id;
   final String title;
   final String uid;
   final List content;
   final DateTime createdAt;
-  DocumentModel({
+  Document({
     required this.id,
     required this.title,
     required this.uid,
@@ -24,8 +24,8 @@ class DocumentModel {
     };
   }
 
-  factory DocumentModel.fromMap(Map<String, dynamic> map) {
-    return DocumentModel(
+  factory Document.fromMap(Map<String, dynamic> map) {
+    return Document(
       id: map['_id'] ?? '',
       title: map['title'] ?? '',
       uid: map['uid'] ?? '',
@@ -36,5 +36,5 @@ class DocumentModel {
 
   String toJson() => json.encode(toMap());
 
-  factory DocumentModel.fromJson(String source) => DocumentModel.fromMap(json.decode(source));
+  factory Document.fromJson(String source) => Document.fromMap(json.decode(source));
 }
