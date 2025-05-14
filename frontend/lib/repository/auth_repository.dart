@@ -5,4 +5,16 @@ class AuthRepository {
   AuthRepository({
     required GoogleSignIn googleSignIn,
   }) : _googleSignIn = googleSignIn;
+
+  void signInWithGoogle() async {
+    try {
+      final user = await _googleSignIn.signIn();
+      if (user != null) {
+        print(user.id);
+      }
+    } catch (e) {
+      print(e);
+    }
+
+  }
 }
