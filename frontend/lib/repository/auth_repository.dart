@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:frontend/models/user.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -27,13 +29,17 @@ class AuthRepository {
           token: '',
         );
 
-        _client.post(
-          Uri.parse('$BACKEND_URL/api/v1/signup/', id),
-          body: userAccount.toJson(),
-          headers: {
-            'Content-Type': 'application/json; charset=UTF-8',
-          }
-        );
+        var response = _client.post(Uri.parse('$BACKEND_URL/api/v1/signup/', id), body: userAccount.toJson(), headers: {
+          'Content-Type': 'application/json; charset=UTF-8',
+        });
+
+        switch (response.statusCode) {
+          case 200:
+            final newUser = userAccount.copyWith(
+              uid: jsonDecode(response.body)['user']['_id'],
+            );
+            break;
+        }
       }
     } catch (e) {
       print(e);
