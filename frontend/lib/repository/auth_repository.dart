@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:frontend/models/user.dart';
+import 'package:frontend/models/error_model.dart'
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -18,7 +19,9 @@ class AuthRepository {
       _client = client;
 
 
-  void signInWithGoogle() async {
+  Future<Error> signInWithGoogle() async {
+    Error error = Error(error: 'Some unexpected error occurred', data: null);
+
     try {
       final user = await _googleSignIn.signIn();
       if (user != null) {
@@ -40,12 +43,14 @@ class AuthRepository {
             final newUser = userAccount.copyWith(
               uid: jsonDecode(response.body)['user']['_id'],
             );
+            error = Error(error: null, data: newUser);
             break;
         }
       }
     } catch (e) {
-      print(e);
+      error = Error(error: e.toString(), data: null);
     }
-
+    
+    return error;
   }
 }
