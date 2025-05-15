@@ -2,14 +2,17 @@ import 'package:frontend/models/user.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:http/http.dart';
 
-final authRepositoryProvider = Provider((ref) => AuthRepository(googleSignIn: GoogleSignIn()));
+final authRepositoryProvider = Provider((ref) => AuthRepository(googleSignIn: GoogleSignIn(), client));
 
 class AuthRepository {
   final GoogleSignIn _googleSignIn;
-  AuthRepository({
-    required GoogleSignIn googleSignIn,
-  }) : _googleSignIn = googleSignIn;
+  final Client _client;
+  AuthRepository({ required GoogleSignIn googleSignIn, required Client client}) 
+    : _googleSignIn = googleSignIn,
+      _client = client;
+
 
   void signInWithGoogle() async {
     try {
@@ -23,6 +26,8 @@ class AuthRepository {
           uid: '',
           token: '',
         );
+
+        _client.post("$BACKEND_URL");
       }
     } catch (e) {
       print(e);
