@@ -7,8 +7,18 @@ import 'package:flutter_riverpod/flutter_riverpod.dart'
 class LoginScreen extends ConsumerWidget {
   const LoginScreen({Key? key}) : super(key: key);
 
-  void signInWithGoogle(WidgetRef ref) {
-    ref.read(authRepositoryProvider).signInWithGoogle();
+  void signInWithGoogle(WidgetRef ref, BuildContext context) async {
+    final sMessenger = ScaffoldMessenger.of(context);
+    final errorModel = await ref.read(authRepositoryProvider).signInWithGoogle();
+    if (errorModel.error == null) {
+      
+    } else {
+      sMessenger.showSnackBar(
+        SnackBar(
+          content: Text(errorModel.error!),
+        ),
+      );
+    }
   }
 
   @override
@@ -16,7 +26,7 @@ class LoginScreen extends ConsumerWidget {
     return Scaffold(
       body: Center(
         child: ElevatedButton.icon(
-          onPressed: () => signInWithGoogle(ref),
+          onPressed: () => signInWithGoogle(ref, context),
           icon: Image.asset(
             'assets/images/g-logo-2.png',
             height: 20,
