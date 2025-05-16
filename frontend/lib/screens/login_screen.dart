@@ -1,3 +1,4 @@
+import 'package:frontend/screens/home_screen.dart';
 import 'package:frontend/repository/auth_repository.dart';
 import 'package:frontend/colors.dart';
 
@@ -9,9 +10,15 @@ class LoginScreen extends ConsumerWidget {
 
   void signInWithGoogle(WidgetRef ref, BuildContext context) async {
     final sMessenger = ScaffoldMessenger.of(context);
+    final navigator = Navigator.of(context);
     final errorModel = await ref.read(authRepositoryProvider).signInWithGoogle();
     if (errorModel.error == null) {
-      
+      ref.read(userProvider.notifier).update((state) => errorModel.data);
+      navigator.push(
+        MaterialPageRoute(
+          builder: (context) => const HomeScreen(),
+        ),
+      );
     } else {
       sMessenger.showSnackBar(
         SnackBar(
