@@ -1,5 +1,5 @@
 class Error {
-  final String error;
+  final String error?;
   final dynamic data;
 
   Error({
